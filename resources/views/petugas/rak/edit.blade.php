@@ -11,22 +11,8 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="rak">Rak</label>
-                <input wire:model="rak" type="number" class="form-control" id="rak" min="1">
+                <input wire:model="rak" type="text" class="form-control" id="rak">
                 @error('rak') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-            <div class="form-group">
-                <label for="baris">Baris</label>
-                <input wire:model="baris" type="number" class="form-control" id="baris" min="1">
-                @error('baris') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-            <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <select wire:model="kategori_id" class="form-control" id="kategori">
-                    @foreach ($kategori as $item)
-                        <option value="{{$item->id}}">{{$item->nama}}</option>
-                    @endforeach
-                </select>
-                @error('kategori_id') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="modal-footer justify-content-between">

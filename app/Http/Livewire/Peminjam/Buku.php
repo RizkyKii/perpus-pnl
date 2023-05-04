@@ -63,6 +63,7 @@ class Buku extends Component
               if ($peminjaman_lama->count() == 0) {
                 $peminjaman_baru = Peminjaman::create([
                     'kode_pinjam' => random_int(100000000, 999999999),
+                    'nama_peminjam' => auth()->user()->name,
                     'peminjam_id' => auth()->user()->id,
                     'status' => 0
                 ]);
@@ -115,9 +116,9 @@ class Buku extends Component
     {
         if ($this->pilih_kategori) {
             if ($this->search) {
-                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->where('kategori_id', $this->kategori_id)->paginate(6);
+                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->where('kategori_id', $this->kategori_id)->paginate(8);
             } else {
-                $buku = ModelsBuku::latest()->where('kategori_id', $this->kategori_id)->paginate(6);
+                $buku = ModelsBuku::latest()->where('kategori_id', $this->kategori_id)->paginate(8);
             }
             $title = Kategori::find($this->kategori_id)->nama;
         }elseif ($this->detail_buku){
@@ -125,9 +126,9 @@ class Buku extends Component
             $title = 'Detail Buku';
         } else {
             if ($this->search) {
-                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->paginate(6);
+                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->paginate(8);
             } else {
-                $buku = ModelsBuku::latest()->paginate(6);
+                $buku = ModelsBuku::latest()->paginate(8);
             }
             $title = 'Semua Buku';
         }

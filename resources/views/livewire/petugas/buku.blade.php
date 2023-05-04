@@ -33,16 +33,18 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th width="10%">No</th>
+                <th>No</th>
                 <th>Sampul</th>
                 <th>Judul</th>
                 <th>ISBN-ISSN</th>
                 <th>Penulis</th>
                 <th>Penerbit</th>
+                <th class="text-wrap">Tempat Publish</th>
                 <th>Kategori</th>
                 <th>Bahasa</th>
-                <th>Tahun Terbit</th>
-                <th width="15%">Aksi</th>
+                <th class="text-wrap">Tahun Terbit</th>
+                <th>Stok</th>
+                <th><center>Aksi</center></th>
               </tr>
             </thead>
             <tbody>
@@ -53,10 +55,12 @@
                 <td class="text-wrap" style="width: 15rem">{{$item->judul}}</td>
                 <td>{{$item->isbn_issn}}</td>
                 <td class="text-wrap" style="width: 15rem">{{$item->penulis}}</td>
-                <td>{{$item->penerbit}}</td>
+                <td class="text-wrap" style="width: 15rem">{{$item->penerbit}}</td>
+                <td class="text-wrap" style="width: 15rem">{{$item->publish}}</td>
                 <td>{{$item->kategori->nama}}</td>
                 <td>{{$item->bahasa}}</td>
                 <td class="text-center">{{$item->tahun}}</td>
+                <td class="text-center">{{$item->stok}}</td>
                 <td>
                     <div class="btn-group">
                         <span wire:click="show({{$item->id}})" class="btn btn-sm btn-warning mr-2">Lihat</span>

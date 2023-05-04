@@ -13,7 +13,7 @@ class Transaksi extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search;
+    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search, $delete, $hapus_permintaan;
 
     public function belumDipinjam()
     {
@@ -74,6 +74,25 @@ class Transaksi extends Component
         session()->flash('sukses', 'Buku berhasil dikembalikan !');
     }
 
+    public function delete($id)
+    {
+        $this->format();
+        $this->delete = true;
+        $this->hapus_permintaan = $id;
+    }
+
+    public function destroy(Peminjaman $peminjaman)
+    {
+        $peminjaman->delete();
+        foreach ($peminjaman->detail_peminjaman as $detail_peminjaman) {
+            $detail_peminjaman->delete();
+        }
+
+        session()->flash('sukses', 'Permintaan peminjaman berhasil ditolak !');
+
+        $this->format();
+    }
+
     public function updatingSearch()
     {
         $this->resetPage();
@@ -113,5 +132,6 @@ class Transaksi extends Component
         $this->belum_dipinjam = false;
         $this->sedang_dipinjam = false;
         $this->selesai_dipinjam = false;
+        unset($this->delete);
     }
 }

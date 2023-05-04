@@ -18,7 +18,11 @@
     <div class="row">
         <div class="col-md-12 mb-3">
             @if ($keranjang->tanggal_pinjam)
+                <center><strong>Silahkan mengambil buku di UPT. Perpustakaan Politeknik Negeri Lhokseumawe</strong></center>
+                <br>
                 <strong>Tanggal Pinjam : {{$keranjang->tanggal_pinjam}}</strong>
+                <br>
+                <strong>Tanggal Kembali : {{$keranjang->tanggal_kembali}}</strong>
             @else
                 <button wire:click="pinjam({{$keranjang->id}})" class="btn btn-sm btn-success">Pinjam</button>
             @endif

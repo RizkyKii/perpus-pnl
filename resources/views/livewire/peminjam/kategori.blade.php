@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -10,6 +10,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/listbuku') }}">Buku</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         Kategori
@@ -42,7 +48,7 @@
                 @else
                     @if ($count > 0)
                         <li class="nav-item">
-                            <a class="nav-link" href="/keranjang">Keranjang <span class="badge bg-primary">{{$count}}</span></a>
+                            <a class="nav-link" href="/keranjang"><span class="badge bg-primary">Keranjang  {{$count}}</span></a>
                         </li>
                     @endif
                     <li class="nav-item dropdown">

@@ -4,8 +4,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Lihat Buku</h4>
-        <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <span wire:click="format" type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Close</span>
         </span>
       </div>
       <div class="modal-body">
@@ -31,12 +31,17 @@
                         <tr>
                             <th>Penulis</th>
                             <td>:</td>
-                            <td>{{$penulis}}</td>
+                            <td class="text-wrap" style="width: 15rem">{{$penulis}}</td>
                         </tr>
                         <tr>
                             <th>Penerbit</th>
                             <td>:</td>
-                            <td>{{$penerbit}}</td>
+                            <td class="text-wrap" style="width: 15rem">{{$penerbit}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tempat Publish</th>
+                            <td>:</td>
+                            <td>{{$publish}}</td>
                         </tr>
                         <tr>
                             <th>Kategori</th>
@@ -56,12 +61,7 @@
                         <tr>
                             <th>Rak</th>
                             <td>:</td>
-                            <td>{{$rak == 0 ? 'none' : $rak}}</td>
-                        </tr>
-                        <tr>
-                            <th>Baris</th>
-                            <td>:</td>
-                            <td>{{$baris == 0 ? 'none' : $baris}}</td>
+                            <td>{{$rak}}</td>
                         </tr>
                         <tr>
                             <th>Stok</th>
@@ -73,9 +73,9 @@
             </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-between">
+      {{-- <div class="modal-footer justify-content-between">
         <span wire:click="format" type="button" class="btn btn-default" data-dismiss="modal">Kembali</span>
-      </div>
+      </div> --}}
     </div>
     <!-- /.modal-content -->
   </div>

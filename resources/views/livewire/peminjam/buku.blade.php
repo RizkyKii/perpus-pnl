@@ -13,6 +13,9 @@
             </div>
           </div>
         </div>
+        <div class="row justify-content-center">
+          {{$buku->links()}}
+      </div>
         @endif
     </div>
 
@@ -46,6 +49,11 @@
                     <td>{{$buku->penerbit}}</td>
                   </tr>
                   <tr>
+                    <th>Tempat Publish</th>
+                    <td>:</td>
+                    <td>{{$buku->publish}}</td>
+                  </tr>
+                  <tr>
                     <th>Kategori</th>
                     <td>:</td>
                     <td>{{$buku->kategori->nama}}</td>
@@ -66,19 +74,15 @@
                     <td>{{$buku->rak->rak}}</td>
                   </tr>
                   <tr>
-                    <th>Baris</th>
-                    <td>:</td>
-                    <td>{{$buku->rak->baris}}</td>
-                  </tr>
-                  <tr>
                     <th>Stok</th>
                     <td>:</td>
                     <td>{{$buku->stok}}</td>
                   </tr>
                 </tbody>
               </table>
-
+              <br>
               <button wire:click="keranjang({{$buku->id}})" class="btn btn-success">Keranjang</button>
+              <a class="btn btn-warning" href="{{ url('/listbuku') }}">Kembali</a> 
         </div>
     </div>
 
@@ -91,16 +95,14 @@
                 <div wire:click="detailBuku({{$item->id}})" class="card mb-4 shadow h-100" style="cursor: pointer">
                     <img src="/storage/{{$item->sampul}}" class="card-img-top" alt="{{$item->judul}}" width="200" height="350">
                     <div class="card-body">
-                      <h5 class="card-title"><strong>{{$item->judul}}</strong></h5>
-                      <p class="card-text">{{$item->penulis}}</p>
+                      <center><h5 class="card-title mb-lg-4"><strong>{{$item->judul}}</strong></h5></center>
+                      <p class="card-text text-wrap mb-lg-1"><strong>Penulis : </strong>{{$item->penulis}}</p>
+                      <p class="card-text mb-lg-1"><strong>Penerbit : </strong>{{$item->penerbit}}</p>
+                      <p class="card-text mb-lg-0"><strong>Tahun Terbit : </strong>{{$item->tahun}}</p>
                     </div>
                   </div> 
             </div>
         @endforeach
-    </div>
-
-    <div class="row justify-content-center">
-        {{$buku->links()}}
     </div>
     
     @else

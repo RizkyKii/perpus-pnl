@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_pinjam');
             $table->foreignId('peminjam_id');
+            $table->string('nama_peminjam');
             $table->foreignId('petugas_pinjam')->nullable();
             $table->foreignId('petugas_kembali')->nullable();
             $table->integer('status');

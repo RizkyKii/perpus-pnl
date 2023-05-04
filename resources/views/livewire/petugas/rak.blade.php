@@ -37,8 +37,6 @@
             <tr>
               <th width="10%">No</th>
               <th>Rak</th>
-              <th>Baris</th>
-              <th>Kategori</th>
               <th width="15%">Aksi</th>
             </tr>
           </thead>
@@ -47,8 +45,6 @@
             <tr>
               <td>{{$loop->iteration}}</td>
               <td>{{$item->rak}}</td>
-              <td>{{$item->baris}}</td>
-              <td>{{$item->kategori->nama}}</td>
               <td>
                   <div class="btn-group">
                       <span wire:click="edit({{$item->id}})" class="btn btn-sm btn-primary mr-2">Edit</span>

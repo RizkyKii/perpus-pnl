@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug');
-            $table->string('isbn_issn');
-            $table->string('sampul');
-            $table->string('penulis');
-            $table->string('penerbit');
+            $table->string('isbn_issn')->nullable();
+            $table->string('sampul')->nullable();
+            $table->string('penulis')->nullable();
+            $table->string('penerbit')->nullable();
+            $table->string('publish')->nullable();
             $table->string('bahasa');
-            $table->string('tahun');
+            $table->string('tahun')->nullable();
             $table->foreignId('kategori_id');
             $table->foreignId('rak_id');
             $table->integer('stok');

@@ -66,10 +66,17 @@
                 @error('sampul') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="publish">Tempat Publish</label>
+                        <input wire:model="publish" type="text" class="form-control" id="publish">
+                        @error('publish') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="kategori">Kategori</label>
-                        <select wire:model="kategori_id" wire:click="pilihKategori" class="form-control" id="kategori">
+                        <select wire:model="kategori_id" class="form-control" id="kategori">
                             <option selected value="">Pilih Kategori</option>
                             @foreach ($kategori as $item)
                                 <option value="{{$item->id}}">{{$item->nama}}</option>       
@@ -78,16 +85,16 @@
                         @error('kategori_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="rak">Rak</label>
                         <select wire:model="rak_id" class="form-control" id="rak">
                             <option selected value="">Pilih Rak</option>
-                            @isset($rak)
+                            
                                 @foreach ($rak as $item)
-                                    <option value="{{$item->id}}">Rak : {{$item->rak}}, Baris : {{$item->baris}}</option>
+                                    <option value="{{$item->id}}">{{$item->rak}}</option>
                                 @endforeach
-                            @endisset
+                           
                         </select>
                         @error('rak_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
@@ -95,7 +102,7 @@
             </div>
         </div>
         <div class="modal-footer justify-content-between">
-        <span wire:click="format" type="button" class="btn btn-default" data-dismiss="modal">Batal</span>
+        <span wire:click="format" type="button" class="btn btn-danger" data-dismiss="modal">Batal</span>
         <span type="button" wire:click="store" class="btn btn-success">Simpan</span>
         </div>
     </div>

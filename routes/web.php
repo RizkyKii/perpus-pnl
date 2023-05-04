@@ -4,8 +4,12 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CekRoleController;
 use App\Http\Controllers\Peminjam\BukuController as PeminjamBukuController;
 use App\Http\Controllers\Peminjam\KeranjangController;
+use App\Http\Controllers\Peminjam\UtamaController;
 use App\Http\Controllers\Petugas\BukuController;
+use App\Http\Controllers\Petugas\ChartController;
+use App\Http\Controllers\Petugas\DashboardController;
 use App\Http\Controllers\Petugas\KategoriController;
+use App\Http\Controllers\Petugas\MetodeController;
 use App\Http\Controllers\Petugas\RakController;
 use App\Http\Controllers\Petugas\TransaksiController;
 use Illuminate\Support\Facades\Route;
@@ -23,33 +27,35 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Route::get('/', PeminjamBukuController::class);
+Route::get('/', UtamaController::class);
+Route::get('/listbuku', PeminjamBukuController::class);
 
 Auth::routes();
 
-Route::get('/cek-role', CekRoleController::class)->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cek-role', CekRoleController::class);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+    // role admin dan petugas
+    Route::middleware(['role:admin|petugas'])->group(function () {
+        Route::get('/dashboard', DashboardController::class);
 
-Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
-     // role admin dan petugas
-        Route::get('/dashboard', function () {
-            return view('petugas/dashboard');
-        });
-
-        Route::get('/buku', BukuController::class);
         Route::get('/kategori', KategoriController::class);
         Route::get('/rak', RakController::class);
+        Route::get('/buku', BukuController::class);
         Route::get('/transaksi', TransaksiController::class);
+        Route::get('/chart', ChartController::class);
+        Route::get('/metode', MetodeController::class);
     });
 
-      // role peminjam
-Route::middleware(['auth', 'role:peminjam'])->group(function () {
+    // role peminjam
+    Route::middleware(['role:peminjam'])->group(function () {
         Route::get('/keranjang', KeranjangController::class);
     });
 
-    //  role admin
-Route::middleware(['auth', 'role:admin'])->group(function () {
+    // role admin
+    Route::middleware(['role:admin'])->group(function () {
         Route::get('/user', UserController::class);
     });
+});
     

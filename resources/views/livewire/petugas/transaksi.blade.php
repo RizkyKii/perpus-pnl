@@ -7,12 +7,12 @@
         
         {{-- @include('petugas/rak/edit') --}}
           
-        {{-- @include('petugas/rak/delete') --}}
+        @include('petugas/transaksi/delete')
 
         <div class="btn-group mb-3">
           <button wire:click="format" class="btn btn-sm bg-navy mr-2">Lihat Semua</button>
           <button wire:click="belumDipinjam" class="btn btn-sm bg-indigo mr-2">Belum Dipinjam</button>
-          <button wire:click="sedangDipinjam" class="btn btn-sm bg-fuchsia mr-2">Sedang Dipinjam</button>
+          <button wire:click="sedangDipinjam" class="btn btn-sm bg-warning mr-2">Sedang Dipinjam</button>
           <button wire:click="selesaiDipinjam" class="btn btn-sm bg-olive mr-2">Selesai Dipinjam</button>
         </div>
 
@@ -40,15 +40,16 @@
           <thead>
             <tr>
               <th width="10%">No</th>
-              <th>Kode Pinjam</th>
+              <th class="text-wrap" style="width: 6rem"><center>Kode Pinjam</center></th>
+              <th class="text-wrap" style="width: 6rem"><center>Nama Peminjam</center></th>
               <th><center>Buku</center></th>
               <th><center>Lokasi</center></th>
-              <th>Tanggal Pinjam</th>
-              <th>Tanggal Kembali</th>
-              <th>Denda</th>
+              <th class="text-wrap" style="width: 6rem"><center>Tanggal Pinjam</center></th>
+              <th class="text-wrap" style="width: 6rem"><center>Tanggal Kembali</center></th>
+              <th><center>Denda</center></th>
               <th><center>Status</center></th>
               @if (!$selesai_dipinjam)
-                <th width="15%">Aksi</th>
+                <th width="15%"><center>Aksi</center></th>
               @endif
             </tr>
           </thead>
@@ -57,10 +58,11 @@
             <tr>
               <td>{{$loop->iteration}}</td>
               <td>{{$item->kode_pinjam}}</td>
+              <td class="text-wrap" style="width: 6rem"><center>{{$item->nama_peminjam}}</center></td>
               <td>
                 <ul>
                     @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                    <li class="text-wrap" style="width: 15rem">{{$detail_peminjaman->buku->judul}}</li>
+                    <li class="text-wrap" style="width: 10rem">{{$detail_peminjaman->buku->judul}}</li>
                     @endforeach
                 </ul>
               </td>
@@ -78,7 +80,7 @@
                 @if ($item->status == 1)
                     <span class="badge bg-indigo">Belum Dipinjam</span>
                 @elseif ($item->status == 2)
-                    <span class="badge bg-fuchsia">Sedang Dipinjam</span>
+                    <span class="badge bg-warning">Sedang Dipinjam</span>
                 @else
                     <span class="badge bg-olive">Selesai Dipinjam</span>
                 @endif
@@ -86,9 +88,12 @@
              @if (!$selesai_dipinjam)
              <td>
               @if ($item->status == 1)
-                  <span wire:click="pinjam({{$item->id}})" class="btn btn-sm btn-success mr-2">Pinjam</span>
+                  <span wire:click="pinjam({{$item->id}})" class="btn btn-sm btn-success mr-2">Terima Pinjaman</span>
+                  <br>
+                  <br>
+                  <span wire:click="delete({{$item->id}})" class="btn btn-sm btn-danger mr-2">Tolak Permintaan</span>
               @elseif ($item->status == 2)
-                  <span wire:click="kembali({{$item->id}})" class="btn btn-sm btn-primary mr-2">Kembali</span>
+                  <span wire:click="kembali({{$item->id}})" class="btn btn-sm btn-primary mr-2">Kembalikan Buku</span>
               @endif
             </td>
              @endif

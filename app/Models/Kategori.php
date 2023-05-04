@@ -12,11 +12,6 @@ class Kategori extends Model
     protected $table = 'kategori';
     protected $fillable = ['nama', 'slug'];
 
-    public function rak()
-    {
-        return $this->hasMany(Rak::class);
-    }
-
     public function buku()
     {
         return $this->hasMany(Buku::class);

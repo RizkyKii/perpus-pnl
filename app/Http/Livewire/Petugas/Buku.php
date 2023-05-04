@@ -11,6 +11,8 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Buku extends Component
 {
     use WithPagination;
@@ -19,30 +21,15 @@ class Buku extends Component
 
     public $create, $edit, $delete, $show;
     public $kategori, $rak;
-    public $kategori_id, $rak_id, $baris;
-    public $judul, $isbn_issn, $penulis, $penerbit, $stok, $sampul, $buku_id, $tahun, $bahasa, $search;
+    public $kategori_id, $rak_id;
+    public $judul, $isbn_issn, $penulis, $penerbit, $stok, $sampul, $buku_id, $tahun, $bahasa, $search, $publish;
 
     protected $rules = [
         'judul' => 'required',
-        'isbn_issn' => 'required',
-        'penulis' => 'required',
-        'sampul' => 'image|max:10240',
-        'penerbit' => 'required',
         'stok' => 'required|numeric|min:1',
         'kategori_id' => 'required|numeric|min:1',  
-        'tahun' => 'required',
         'bahasa' => 'required',
     ];
-
-    protected $validationAttributes = [
-        'rak_id' => 'rak',
-        'kategori_id' => 'kategori',
-    ];
-
-    public function pilihKategori()
-    {
-        $this->rak = Rak::where('kategori_id', $this->kategori_id)->get();
-    }
 
     public function create()
     {
@@ -50,20 +37,26 @@ class Buku extends Component
         
         $this->create = true;
         $this->kategori = Kategori::all();
+        $this->rak = Rak::all();
     }
 
     public function store()
     {
         $this->validate();
 
-        $this->sampul = $this->sampul->store('buku', 'public');
-
+        if (!$this->sampul) {
+            $this->sampul = ('buku/default.png');
+        }else {
+            $this->sampul = $this->sampul->store('buku', 'public');
+        }
+        
         ModelsBuku::create([
             'sampul' => $this->sampul,
             'judul' => $this->judul,
             'isbn_issn' => $this->isbn_issn,
             'penulis' => $this->penulis,
             'penerbit' => $this->penerbit,
+            'publish' => $this->publish,
             'stok' => $this->stok,
             'bahasa' => $this->bahasa,
             'tahun' => $this->tahun,
@@ -86,12 +79,12 @@ class Buku extends Component
         $this->isbn_issn = $buku->isbn_issn;
         $this->penulis = $buku->penulis;
         $this->penerbit = $buku->penerbit;
+        $this->publish = $buku->publish;
         $this->stok = $buku->stok;
         $this->bahasa = $buku->bahasa;
         $this->tahun = $buku->tahun;
         $this->kategori = $buku->kategori->nama;
         $this->rak = $buku->rak->rak;
-        $this->baris = $buku->rak->baris;
     }
 
     public function edit(ModelsBuku $buku)
@@ -104,36 +97,29 @@ class Buku extends Component
         $this->isbn_issn = $buku->isbn_issn;
         $this->penulis = $buku->penulis;
         $this->penerbit = $buku->penerbit;
+        $this->publish = $buku->publish;
         $this->stok = $buku->stok;
         $this->bahasa = $buku->bahasa;
         $this->tahun = $buku->tahun;
         $this->kategori_id = $buku->kategori_id;
         $this->rak_id = $buku->rak_id;
         $this->kategori = Kategori::all();
-        $this->rak = Rak::where('kategori_id', $buku->kategori_id)->get();
+        $this->rak = Rak::all();
     }
 
     public function update(ModelsBuku $buku)
     {
         $validasi = [
         'judul' => 'required',
-        'isbn_issn' => 'required',
-        'penulis' => 'required',
-        'penerbit' => 'required',
         'bahasa' => 'required',
-        'tahun' => 'required',
         'stok' => 'required|numeric|min:1',
         'kategori_id' => 'required|numeric|min:1',  
         ];
         
-        if ($this->sampul) {
-            $validasi['sampul'] = 'image|max:10240';
-        } 
-        
         $this->validate($validasi);
 
         if ($this->sampul) {
-            Storage::disk('public')->delete($buku->sampul);
+            // Storage::disk('public')->delete($buku->sampul);
             $this->sampul = $this->sampul->store('buku', 'public');
         } else {
             $this->sampul = $buku->sampul;
@@ -145,6 +131,7 @@ class Buku extends Component
             'isbn_issn' => $this->isbn_issn,
             'penulis' => $this->penulis,
             'penerbit' => $this->penerbit,
+            'publish' => $this->publish,
             'stok' => $this->stok,
             'bahasa' => $this->bahasa,
             'tahun' => $this->tahun,
@@ -210,5 +197,6 @@ class Buku extends Component
         unset($this->kategori_id);
         unset($this->tahun);
         unset($this->bahasa);
+        unset($this->publish);
     }
 }
