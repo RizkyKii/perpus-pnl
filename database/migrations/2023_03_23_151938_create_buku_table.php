@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('buku', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('slug');
+            $table->string('judul', 200);
+            $table->string('slug', 200);
+            $table->char('kd_produk', 100);
             $table->string('isbn_issn')->nullable();
             $table->string('sampul')->nullable();
             $table->string('penulis')->nullable();

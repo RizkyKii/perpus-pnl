@@ -62,7 +62,8 @@ class Buku extends Component
             'tahun' => $this->tahun,
             'kategori_id' => $this->kategori_id,
             'rak_id' => $this->rak_id,
-            'slug' => Str::slug($this->sampul)
+            'slug' => Str::slug($this->sampul),
+            'kd_produk' => Str::uuid()
         ]);
 
         session()->flash('sukses', 'Data buku berhasil ditambah !');
@@ -137,7 +138,8 @@ class Buku extends Component
             'tahun' => $this->tahun,
             'kategori_id' => $this->kategori_id,
             'rak_id' => $this->rak_id,
-            'slug' => Str::slug($this->sampul)
+            'slug' => Str::slug($this->sampul),
+            'kd_produk' => Str::uuid()
         ]);
 
         session()->flash('sukses', 'Data buku berhasil diubah !');
@@ -155,7 +157,7 @@ class Buku extends Component
     
     public function destroy(ModelsBuku $buku)
     {
-        Storage::disk('public')->delete($buku->sampul);
+        // Storage::disk('public')->delete($buku->sampul);
         $buku->delete();
 
         session()->flash('sukses', 'Data buku berhasil dihapus !');

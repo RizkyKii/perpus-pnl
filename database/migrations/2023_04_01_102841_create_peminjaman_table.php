@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_pinjam');
+            $table->char('kode_pinjam', 100);
             $table->foreignId('peminjam_id');
+            $table->char('kd_barang', 200);
             $table->string('nama_peminjam');
             $table->foreignId('petugas_pinjam')->nullable();
             $table->foreignId('petugas_kembali')->nullable();

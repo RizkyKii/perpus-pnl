@@ -13,7 +13,8 @@
 
       <div class="card">
         <div class="card-header">
-          <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
+          <span wire:click="create" class="btn btn-sm btn-primary">Tambah Data Buku</span>
+          <a href="{{ route('excel') }}" class="btn btn-sm btn-success">Export Data Buku ke Excel</a>
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">

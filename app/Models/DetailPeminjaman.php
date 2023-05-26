@@ -10,7 +10,7 @@ class DetailPeminjaman extends Model
     use HasFactory;
 
     protected $table = 'detail_peminjaman';
-    protected $fillable = ['peminjaman_id', 'buku_id'];
+    protected $fillable = ['peminjaman_id', 'buku_id', 'kode_pinjam', 'kd_barang'];
 
     public function peminjaman()
     {
@@ -20,5 +20,10 @@ class DetailPeminjaman extends Model
     public function buku()
     {
         return $this->belongsTo(Buku::class);
+    }
+
+    public function hitungTransaksi($idTransaksi)
+    {
+        return $this::where('kode_pinjam', $idTransaksi) -> count();
     }
 }

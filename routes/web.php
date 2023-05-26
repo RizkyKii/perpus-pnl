@@ -43,14 +43,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kategori', KategoriController::class);
         Route::get('/rak', RakController::class);
         Route::get('/buku', BukuController::class);
+        Route::get('/bukuexcel', [BukuController::class, 'bukuexcel'])->name('excel');
         Route::get('/transaksi', TransaksiController::class);
         Route::get('/chart', ChartController::class);
         Route::get('/metode', MetodeController::class);
+        Route::post('/prosesAnalisaApriori', [MetodeController::class, 'prosesAnalisaApriori']);
+        Route::get('/hasilAnalisa/{kdPengujian}', [MetodeController::class, 'hasilAnalisa']);
     });
 
     // role peminjam
     Route::middleware(['role:peminjam'])->group(function () {
         Route::get('/keranjang', KeranjangController::class);
+        Route::get('/keranjangpdf', [KeranjangController::class, 'keranjangpdf'])->name('bukti');
     });
 
     // role admin

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Petugas;
 
+use App\Exports\BukuExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
@@ -16,5 +18,10 @@ class BukuController extends Controller
     public function __invoke(Request $request)
     {
         return view('petugas/buku/index');
+    }
+
+    public function bukuexcel()
+    {
+        return Excel::download(new BukuExport, 'data-buku.xlsx');
     }
 }

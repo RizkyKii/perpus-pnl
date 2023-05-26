@@ -11,7 +11,7 @@ class Peminjaman extends Model
     use HasFactory;
 
     protected $table = 'peminjaman';
-    protected $fillable = ['kode_pinjam', 'peminjam_id', 'nama_peminjam', 'petugas_pinjam', 'petugas_kembali', 'status', 'denda', 'tanggal_pinjam', 'tanggal_kembali', 'tanggal_pengembalian'];
+    protected $fillable = ['kode_pinjam', 'peminjam_id', 'kd_barang', 'nama_peminjam', 'petugas_pinjam', 'petugas_kembali', 'status', 'denda', 'tanggal_pinjam', 'tanggal_kembali', 'tanggal_pengembalian'];
 
     public function detail_peminjaman()
     {
@@ -21,6 +21,16 @@ class Peminjaman extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function dataProduk($kdProduk)
+    {
+        return Buku::where('kd_produk', $kdProduk) -> first();
+    }
+
+    public function hitungTransaksi($idTransaksi)
+    {
+        return $this::where('kode_pinjam', $idTransaksi) -> count();
     }
 
     // accessor

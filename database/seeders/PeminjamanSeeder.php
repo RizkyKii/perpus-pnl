@@ -19,35 +19,36 @@ class PeminjamanSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 850; $i++) {
-            $faker = Factory::create('id_ID');
-            $tanggal_pinjam = $faker->dateTimeBetween('-40 month', '-2 week');
-            $tanggal_kembali = Carbon::parse($tanggal_pinjam)->addDays(14);
-            $tanggal_pengembalian = Carbon::parse($tanggal_pinjam)->addDays(13);
+        // for ($i=0; $i < 850; $i++) {
+        //     $faker = Factory::create('id_ID');
+        //     $tanggal_pinjam = $faker->dateTimeBetween('-40 month', '-2 week');
+        //     $tanggal_kembali = Carbon::parse($tanggal_pinjam)->addDays(14);
+        //     $tanggal_pengembalian = Carbon::parse($tanggal_pinjam)->addDays(13);
 
-            $user = User::create([
-                'name' => $faker->name(),
-                'email' => $faker->email(),
-                'password' => bcrypt('123123123'),
-            ])->assignRole('peminjam');
+        //     $user = User::create([
+        //         'name' => $faker->name(),
+        //         'email' => $faker->email(),
+        //         'password' => bcrypt('123123123'),
+        //     ])->assignRole('peminjam');
         
-            $peminjaman = Peminjaman::create([
-                'kode_pinjam' => random_int(100000000, 999999999),
-                'peminjam_id' => $user->id,
-                'nama_peminjam' => $user->name,
-                'petugas_pinjam' => random_int(1,2),
-                'petugas_kembali' => random_int(1,2),
-                'denda' => 0,
-                'status' => 3,
-                'tanggal_pinjam' => $tanggal_pinjam,
-                'tanggal_kembali' => $tanggal_kembali,
-                'tanggal_pengembalian' => $tanggal_pengembalian,
-            ]);
+        //     $peminjaman = Peminjaman::create([
+        //         'kode_pinjam' => random_int(100000000, 999999999),
+        //         'peminjam_id' => $user->id,
+        //         'nama_peminjam' => $user->name,
+        //         'petugas_pinjam' => random_int(1,2),
+        //         'petugas_kembali' => random_int(1,2),
+        //         'denda' => 0,
+        //         'status' => 3,
+        //         'tanggal_pinjam' => $tanggal_pinjam,
+        //         'tanggal_kembali' => $tanggal_kembali,
+        //         'tanggal_pengembalian' => $tanggal_pengembalian,
+        //     ]);
 
-            DetailPeminjaman::create([
-                'peminjaman_id' => $peminjaman->id,
-                'buku_id' => random_int(1,1001)
-            ]);
-        }
+        //     DetailPeminjaman::create([
+        //         'peminjaman_id' => $peminjaman->id,
+        //         'buku_id' => random_int(1,1001),
+        //         'kode_pinjam' => $peminjaman->kode_pinjam
+        //     ]);
+        // }
     }
 }

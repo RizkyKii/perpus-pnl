@@ -63,6 +63,7 @@ class Buku extends Component
               if ($peminjaman_lama->count() == 0) {
                 $peminjaman_baru = Peminjaman::create([
                     'kode_pinjam' => random_int(100000000, 999999999),
+                    'kd_barang' => $buku->kd_produk,
                     'nama_peminjam' => auth()->user()->name,
                     'peminjam_id' => auth()->user()->id,
                     'status' => 0
@@ -70,7 +71,9 @@ class Buku extends Component
 
                 DetailPeminjaman::create([
                     'peminjaman_id' => $peminjaman_baru->id,
-                    'buku_id' => $buku->id
+                    'buku_id' => $buku->id,
+                    'kode_pinjam' => $peminjaman_baru->kode_pinjam,
+                    'kd_barang' => $buku->kd_produk
                 ]);
 
                 $this->emit('tambahKeranjang');
@@ -81,10 +84,11 @@ class Buku extends Component
                 if ($peminjaman_lama[0]->buku_id == $buku->id) {
                     session()->flash('gagal', 'Tidak boleh meminjam buku yang sama !');
                 } else {
-                    
                     DetailPeminjaman::create([
                         'peminjaman_id' => $peminjaman_lama[0]->peminjaman_id,
-                        'buku_id' => $buku->id
+                        'buku_id' => $buku->id,
+                        'kode_pinjam' => $peminjaman_lama[0]->kode_pinjam,
+                        'kd_barang' => $buku->kd_produk
                     ]);
 
                     $this->emit('tambahKeranjang');

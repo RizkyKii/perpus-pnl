@@ -19,10 +19,14 @@
         <div class="col-md-12 mb-3">
             @if ($keranjang->tanggal_pinjam)
                 <center><strong>Silahkan mengambil buku di UPT. Perpustakaan Politeknik Negeri Lhokseumawe</strong></center>
+                <center><strong>dan mohon untuk memperlihatkan bukti pinjaman pada saat pengambilan buku</strong></center>
                 <br>
                 <strong>Tanggal Pinjam : {{$keranjang->tanggal_pinjam}}</strong>
                 <br>
                 <strong>Tanggal Kembali : {{$keranjang->tanggal_kembali}}</strong>
+                <br>
+                <br>
+                <a href="{{ route('bukti') }}" class="btn btn-sm btn-success">Download PDF Bukti Pinjaman</a>
             @else
                 <button wire:click="pinjam({{$keranjang->id}})" class="btn btn-sm btn-success">Pinjam</button>
             @endif
@@ -54,7 +58,7 @@
                   @foreach ($keranjang->detail_peminjaman as $item)
                   <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->buku->judul}}</td>
+                    <td class="text-wrap">{{$item->buku->judul}}</td>
                     <td>{{$item->buku->isbn_issn}}</td>
                     <td>{{$item->buku->penulis}}</td>
                     <td>{{$item->buku->penerbit}}</td>

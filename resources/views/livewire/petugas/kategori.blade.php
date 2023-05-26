@@ -11,7 +11,7 @@
 
       <div class="card">
         <div class="card-header">
-          <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
+          <span wire:click="create" class="btn btn-sm btn-primary">Tambah Data Kategori</span>
 
           
           <div class="card-tools">

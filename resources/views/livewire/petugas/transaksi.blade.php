@@ -18,9 +18,6 @@
 
       <div class="card">
         <div class="card-header">
-          <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
-
-        
          <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input wire:model="search" type="search" name="table_search" class="form-control float-right" placeholder="Search">
@@ -43,9 +40,9 @@
               <th class="text-wrap" style="width: 6rem"><center>Kode Pinjam</center></th>
               <th class="text-wrap" style="width: 6rem"><center>Nama Peminjam</center></th>
               <th><center>Buku</center></th>
-              <th><center>Lokasi</center></th>
               <th class="text-wrap" style="width: 6rem"><center>Tanggal Pinjam</center></th>
               <th class="text-wrap" style="width: 6rem"><center>Tanggal Kembali</center></th>
+              <th class="text-wrap" style="width: 6rem"><center>Tanggal Dikembalikan</center></th>
               <th><center>Denda</center></th>
               <th><center>Status</center></th>
               @if (!$selesai_dipinjam)
@@ -66,16 +63,10 @@
                     @endforeach
                 </ul>
               </td>
-              <td>
-                <ul>
-                    @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                    <li>{{$detail_peminjaman->buku->rak->lokasi}}</li>
-                    @endforeach
-                </ul>
-              </td>
               <td>{{$item->tanggal_pinjam}}</td>
               <td>{{$item->tanggal_kembali}}</td>
-              <td>{{$item->denda}}</td>
+              <td>{{$item->tanggal_pengembalian}}</td>
+              <td><center>{{$item->denda}}</center></td>
               <td>
                 @if ($item->status == 1)
                     <span class="badge bg-indigo">Belum Dipinjam</span>

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('peminjaman_id');
             $table->foreignId('buku_id');
+            $table->char('kode_pinjam', 100);
+            $table->char('kd_barang', 200);
             $table->timestamps();
         });
     }
