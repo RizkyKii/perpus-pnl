@@ -13,11 +13,12 @@ var mainApp = new Vue({
 
 function renderPage(page, judulPage)
 {
-    $("#divUtama").html("Memuat ...");
-    $("#divUtama").load(server + page);
+    $("#app").html('<div style="display: flex; justify-content: center; align-items: center;">' +
+        '<img src="/ladun/base/loading.svg" />' +
+        '</div>');
+    $("#app").load(server + page);
     mainApp.judulPage = judulPage;
 }
-
 
 function pesanUmumApp(icon, title, text)
 {

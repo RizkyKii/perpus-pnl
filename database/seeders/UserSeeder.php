@@ -28,12 +28,12 @@ class UserSeeder extends Seeder
             'email_verified_at' => now()
         ])->assignRole('petugas');
 
-        User::create([
-            'name' => 'peminjam',
-            'email' => 'peminjam@gmail.com',
-            'password' => bcrypt('1234567890'),
-            'email_verified_at' => now()
-        ])->assignRole('peminjam');
+        // User::create([
+        //     'name' => 'peminjam',
+        //     'email' => 'peminjam@gmail.com',
+        //     'password' => bcrypt('1234567890'),
+        //     'email_verified_at' => now()
+        // ])->assignRole('peminjam');
 
         User::create([
             'name' => 'rizky',
@@ -42,11 +42,11 @@ class UserSeeder extends Seeder
             'email_verified_at' => now()
         ])->assignRole('peminjam');
 
-        User::create([
-            'name' => 'kii',
-            'email' => 'kii@gmail.com',
-            'password' => bcrypt('1234567890'),
-            'email_verified_at' => now()
-        ])->assignRole('peminjam');
+        // User::create([
+        //     'name' => 'kii',
+        //     'email' => 'kii@gmail.com',
+        //     'password' => bcrypt('1234567890'),
+        //     'email_verified_at' => now()
+        // ])->assignRole('peminjam');
     }
 }

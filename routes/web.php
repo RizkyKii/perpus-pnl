@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Algoritma;
 use App\Http\Controllers\CekRoleController;
 use App\Http\Controllers\Peminjam\BukuController as PeminjamBukuController;
 use App\Http\Controllers\Peminjam\KeranjangController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\Petugas\BukuController;
 use App\Http\Controllers\Petugas\ChartController;
 use App\Http\Controllers\Petugas\DashboardController;
 use App\Http\Controllers\Petugas\KategoriController;
-use App\Http\Controllers\Petugas\MetodeController;
 use App\Http\Controllers\Petugas\RakController;
 use App\Http\Controllers\Petugas\TransaksiController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +29,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', UtamaController::class);
 Route::get('/listbuku', PeminjamBukuController::class);
+Route::get('/app/algoritma/setup', [Algoritma::class, 'setupPerhitunganAlgoritma']);
+Route::post('/proses', [Algoritma::class, 'prosesAnalisaAlgoritma']);
+Route::get('/app/algoritma/analisa/hasil/{kdPengujian}', [Algoritma::class, 'hasilAnalisa']);
 
 Auth::routes();
 
@@ -46,9 +49,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bukuexcel', [BukuController::class, 'bukuexcel'])->name('excel');
         Route::get('/transaksi', TransaksiController::class);
         Route::get('/chart', ChartController::class);
-        Route::get('/metode', MetodeController::class);
-        Route::post('/prosesAnalisaApriori', [MetodeController::class, 'prosesAnalisaApriori']);
-        Route::get('/hasilAnalisa/{kdPengujian}', [MetodeController::class, 'hasilAnalisa']);
     });
 
     // role peminjam

@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Buku;
-use App\Models\DetailPeminjaman;
-use App\Models\Peminjaman;
+
 
 class M_Support extends Model
 {
@@ -22,6 +20,6 @@ class M_Support extends Model
 
     public function totalTransaksi($kdProduk)
     {
-        return Peminjaman::where('kd_barang', $kdProduk)->count();
+        return DetailPeminjaman::where('kd_barang', $kdProduk)->count();
     }
 }

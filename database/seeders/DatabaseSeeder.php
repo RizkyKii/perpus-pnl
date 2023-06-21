@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
             TransaksiSeeder::class,
             PeminjamanSeeder::class
         ]);
-        Artisan::call('importDataBuku');
+        // Artisan::call('importDataBuku');
     }
 }

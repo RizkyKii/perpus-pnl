@@ -24,13 +24,19 @@
                 <strong>Tanggal Pinjam : {{$keranjang->tanggal_pinjam}}</strong>
                 <br>
                 <strong>Tanggal Kembali : {{$keranjang->tanggal_kembali}}</strong>
-                <br>
-                <br>
+                <td>
+                    @if ($keranjang->status == 1)
+                        <center><span class="badge bg-danger">Permintaan Belum Diterima</span></center>
+                    @elseif ($keranjang->status == 2)
+                        <center><span class="badge bg-success">Buku Sedang Dipinjam</span></center>
+                    @endif
+                  </td>
                 <a href="{{ route('bukti') }}" class="btn btn-sm btn-success">Download PDF Bukti Pinjaman</a>
             @else
                 <button wire:click="pinjam({{$keranjang->id}})" class="btn btn-sm btn-success">Pinjam</button>
             @endif
             <strong class="float-end">Kode Pinjam : {{$keranjang->kode_pinjam}}</strong>
+
         </div>
     </div>
 
@@ -47,7 +53,6 @@
                     <th>Kategori</th>
                     <th>Bahasa</th>
                     <th>Rak</th>
-                    <th>Baris</th>
                     @if (!$keranjang->tanggal_pinjam)
                     <th></th>
                     @endif 
@@ -65,7 +70,6 @@
                     <td>{{$item->buku->kategori->nama}}</td>
                     <td>{{$item->buku->bahasa}}</td>
                     <td>{{$item->buku->rak->rak}}</td>
-                    <td>{{$item->buku->rak->baris}}</td>
                     <td>
                     @if (!$keranjang->tanggal_pinjam)
                         <button wire:click="hapus({{$keranjang->id}}, {{$item->id}})" class="btn btn-sm btn-danger">Hapus</button>

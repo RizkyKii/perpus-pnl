@@ -15,3 +15,5 @@
 
   <!-- Responsive datatable examples -->
   <link href="{{ asset('ladun/apaxy/') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('ladun/apaxy/') }}/images/favicon.png">
