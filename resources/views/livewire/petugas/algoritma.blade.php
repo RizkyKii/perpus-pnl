@@ -1,24 +1,9 @@
-@extends('layouts/app')
-
-@section('content')
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
-    @include('admin-lte/flash')
-    <div class="col-12 col-lg-5">
-        <center><h2 class="mb-4">Rekomendasi Buku</h2></center>
-    </div>
+@include('admin-lte/flash')
 
     <!-- Button trigger modal -->
-<center><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalLong">
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalLong">
     Info Pemakaian
-  </button></center>
+</button>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModalLong"  role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -33,19 +18,17 @@
           <center><p class="mb-5 mb-lg-3"><b>INFORMASI FITUR REKOMENDASI</b></p></center>
           <p class="mb-5 mb-lg-3">1. Fitur ini dibangun untuk memberikan rekomendasi buku yang paling banyak dipinjam</p>
           <p class="mb-5 mb-lg-3">2. Fitur ini memakai algoritma CT-PRO (Compact-Tree Apriori)</p>
-          <p class="mb-5 mb-lg-3">3. Minimum support adalah ambang batas untuk menentukan seberapa umum sebuah aturan asosiasi harus muncul dalam data agar dianggap penting. 
-            Jika minimum support yang ditentukan adalah 3, artinya aturan tersebut harus terjadi dalam setidaknya 3 atau di atas 3 dari total transaksi agar dianggap relevan.</p>
-          <p class="mb-5 mb-lg-3">4. Minimum confidence adalah ambang batas untuk menentukan seberapa kuat sebuah aturan asosiasi harus ada agar dianggap penting. 
-            Jika minimum confidence adalah 5%, artinya aturan tersebut harus terbukti benar setidaknya 5% dari keseluruhan kasus agar 
-            dianggap signifikan.</p>
+          <p class="mb-5 mb-lg-3">3. Jika ingin mendapatkan rekomendasi buku yang banyak dipinjam, nilai minimum support dapat dinaikkan. Jika ingin mendapatkan rekomendasi yang bervariasi, nilai minimum support dapat direndahkan.</p>
+          <p class="mb-5 mb-lg-3">4. Nilai confidence merupakan nilai kuatnya antara kedua item. Sebagai contoh, nilai min. support adalah 5 dan terdapat 2 contoh kombinasi antara dua item yang lewat nilai support 5.
+            Item A/B memiliki kombinasi dengan nilai 6, dan sementara C/D memiliki kombinasi dengan nilai 7. Akan tetapi, nilai confidence yang ditentukan misalnya adalah 7, maka item kombinasi A/B tidak akan lulus,
+            karena nilai tersebut tidak terlalu kuat dibandingkan dengan item kombinasi C/D yang memiliki nilai 7.
+          </p>
             <br>
             <center><p class="mb-5 mb-lg-3"><b>------- PETUNJUK PEMAKAIAN-------</b></p></center>
           <p class="mb-5 mb-lg-3">1. Silahkan memasukkan nama anda pada form</p>
           <p class="mb-lg-3">2. Silahkan memilih nilai minimal support (1-10), perlu diingat bahwa jika nilai minimal support 
-            yang dipilih semakin rendah maka proses akan menjadi semakin lama</p>
-          <p class="mb-5 mb-lg-3"> 3. Silahkan memilih nilai minimal confidence (1-10), perlu diingat bahwa jika nilai minimal confidence
-            yang dipilih semakin tinggi akan menyebabkan jumlah rekomendasi menjadi lebih sedikit atau tidak. Dengan begitu, disarankan untuk
-            memilih nilai yang setara atau di atas minimal support. Contoh: min. supp: 2, min. confidence 2 atau 3</p>     
+            yang dipilih semakin rendah maka proses akan menjadi semakin lama (tergantung seberapa banyak data diproses)</p>
+          <p class="mb-5 mb-lg-3"> 3. Silahkan memilih nilai minimal confidence (1-10)</p>     
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -55,9 +38,10 @@
   </div>
 
 <br>
+<br>
 
 <div class="row" id="divDataMentor">
-    <center><div class="col-md-7">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">Setup nilai support & confidence</div>
             <div class="card-body" id="divFormSupp">
@@ -101,7 +85,7 @@
                     </select>
                 </div>
                 <br>
-                <div class="form-group">
+                <div class="form-group d-flex justify-content-center">
                     <a class="btn btn-success float-center" href="javascript:void(0)" onclick="prosesAlgoritma()">Mulai Rekomendasi</a>
                 </div>
             </div>
@@ -113,7 +97,7 @@
 
         </div>
 
-    </div></center>
+    </div>
 </div>
 
 <script>
@@ -141,14 +125,10 @@
             console.log(res.data);
             let kdPengujian = res.data.kdPengujian;
             pesanUmumApp('success', 'Sukses', 'Proses analisa rekomendasi buku selesai !');
-            renderPage('app/algoritma/analisa/hasil/'+kdPengujian, 'hasilAnalisa');
+            renderPage('hasil/'+kdPengujian, 'hasilAnalisa');
             
             // window.location.replace('app/algoritma/analisa/hasil/'+kdPengujian);
         });
     }
 
 </script>
-</body>
-</html>
-
-@endsection

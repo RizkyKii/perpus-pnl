@@ -63,7 +63,11 @@
                 </td>
                 <td>
                   <div class="btn-group">
-                       <span wire:click="delete({{$item->id}})" class="btn btn-sm btn-danger">Hapus</span>
+                    @if ($item->roles[0]->name == 'admin')
+                        
+                    @else
+                    <span wire:click="delete({{$item->id}})" class="btn btn-sm btn-danger">Hapus</span>
+                    @endif
                    </div> 
                </td>
               </tr>

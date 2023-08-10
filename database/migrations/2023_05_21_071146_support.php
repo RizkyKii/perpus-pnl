@@ -13,7 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('support', function (Blueprint $table) {
+            $table -> id();
+            $table -> char('kd_pengujian', 100);
+            $table -> char('kd_produk', 200);
+            $table -> float('support');
+            $table -> timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('support');
     }
 };

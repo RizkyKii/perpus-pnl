@@ -30,12 +30,9 @@
                 </li>
                 @if (auth()->user())
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)" onclick="renderPage('app/algoritma/setup', 'Rekomendasi Buku')">
-                        <i class="mdi mdi-equalizer-outline mr-2"></i>Lihat Rekomendasi
-                    </a>
+                    <a class="nav-link" href="{{ url('/rekomendasi') }}">Rekomendasi Buku</a>
                 </li>
                 @endif
-                
             </ul>
 
             <!-- Right Side Of Navbar -->

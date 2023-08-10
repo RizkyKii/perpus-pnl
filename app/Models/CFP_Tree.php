@@ -60,8 +60,8 @@ class CFP_Tree extends Model
 
     private function calculateSupport($itemset)
     {
-        // Retrieve the support from your existing M_Support model based on the provided itemset
-        $support = M_Support::whereIn('kd_produk', $itemset)->sum('support');
+        // Retrieve the support from your existing Support model based on the provided itemset
+        $support = Support::whereIn('kd_produk', $itemset)->sum('support');
 
         return $support;
     }

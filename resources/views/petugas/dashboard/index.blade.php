@@ -222,16 +222,6 @@
     </div>
   </div>
 
-  <div class="row my-2">
-    <div class="col-md 12">
-      <div class="card">
-        <div class="card-body">
-          <h5>Grafik selesai peminjaman terbaru</h5>
-          <canvas id="myChart" height="125"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection
 
 @section('script')

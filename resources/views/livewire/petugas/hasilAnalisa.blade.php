@@ -1,4 +1,5 @@
-@extends('layouts/app')
+@extends('admin-lte/app')
+@section('title', 'Hasil Rekomendasi')
 
 @section('content')
 
@@ -143,8 +144,7 @@
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>Pola</th>
-                          <th>Confidence</th>
+                          <th>Rekomendasi</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -155,7 +155,6 @@
                           Buku <b>{{ $is -> buku($is -> kd_barang_a) -> judul }}</b> banyak yang diminati, 
                           maka direkomendasikan untuk meminjam buku <b>{{ $is -> buku($is -> kd_barang_b) -> judul }}</b>
                       </td>
-                      <td>{{ $is -> support }} %</td>
                   </tr>
                   @endforeach
                   </tbody>
@@ -164,6 +163,22 @@
           </div>
       </div>
     </div>
+
+
+                 
+    {{-- <div class="row">
+        @foreach ($dataMinConfidence as $is)
+            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
+                <div class="card mb-4 shadow h-100" style="cursor: pointer">
+                    <img src="/storage/{{$is->buku($is->kd_barang_a)->sampul}}" class="card-img-top" alt=""" width="200" height="350">
+                    <div class="card-body">
+                        <center><h5 class="card-title mb-lg-4"><strong>{{$is->buku($is->kd_barang_a)->judul}}</strong></h5></center>
+                      </div>
+                    <br>
+                  </div> 
+            </div>
+            @endforeach
+    </div> --}}
 
     <script>
         $("#tblDataSupport").dataTable();

@@ -3,21 +3,14 @@
 // insialisasi 
 var mainApp = new Vue({
     el : '#mainApp',
-    data : {
-        judulPage : 'Dashboard'
-    },
     methods : {
 
     }
 });
 
-function renderPage(page, judulPage)
+function renderPage(page)
 {
-    $("#app").html('<div style="display: flex; justify-content: center; align-items: center;">' +
-        '<img src="/ladun/base/loading.svg" />' +
-        '</div>');
     $("#app").load(server + page);
-    mainApp.judulPage = judulPage;
 }
 
 function pesanUmumApp(icon, title, text)

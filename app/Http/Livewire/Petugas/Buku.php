@@ -139,7 +139,6 @@ class Buku extends Component
             'kategori_id' => $this->kategori_id,
             'rak_id' => $this->rak_id,
             'slug' => Str::slug($this->sampul),
-            'kd_produk' => Str::uuid()
         ]);
 
         session()->flash('sukses', 'Data buku berhasil diubah !');

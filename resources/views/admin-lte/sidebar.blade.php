@@ -70,6 +70,24 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a class="nav-link @yield('active-algoritma')" href="javascript:void(0)" onclick="renderPage('algoritma')">
+                  <i class="nav-icon fas fa-plus"></i>
+                  <p>
+                    Buat Rekomendasi
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/lihat" class="nav-link @yield('active-lihat')">
+                  <i class="nav-icon fas fa-info"></i>
+                  <p>
+                    Daftar Rekomendasi
+                  </p>
+                </a>
+              </li>
+
               @role('admin')
               <li class="nav-header">ADMIN</li>
               <li class="nav-item">

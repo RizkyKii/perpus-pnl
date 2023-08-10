@@ -65,7 +65,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td class="text-wrap">{{$item->buku->judul}}</td>
                     <td>{{$item->buku->isbn_issn}}</td>
-                    <td>{{$item->buku->penulis}}</td>
+                    <td class="text-wrap">{{$item->buku->penulis}}</td>
                     <td>{{$item->buku->penerbit}}</td>
                     <td>{{$item->buku->kategori->nama}}</td>
                     <td>{{$item->buku->bahasa}}</td>

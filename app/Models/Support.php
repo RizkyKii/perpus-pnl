@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class M_Support extends Model
+class Support extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbl_support';
+    protected $table = 'support';
     protected $fillable = ['kd_pengujian', 'kd_produk', 'support'];
 
     public function buku($kdProduk)

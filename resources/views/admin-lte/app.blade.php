@@ -6,10 +6,8 @@
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  @include('admin-lte/preloader')
+<div class="wrapper" id="mainApp">
+  <div id="app">
 
   <!-- Navbar -->
  @include('admin-lte/navbar')
@@ -44,7 +42,11 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+  </div>
 
+    <!-- Preloader -->
+    @include('admin-lte/preloader')
+@include('admin-lte/jsscript')
 @include('admin-lte/javascript')
 @yield('script')
 @livewireScripts

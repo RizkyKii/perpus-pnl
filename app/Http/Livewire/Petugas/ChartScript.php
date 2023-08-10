@@ -20,7 +20,7 @@ class ChartScript extends Component
 
     public function ubahBulanTahun()
     {
-        // 
+       
     }
 
     public function render()

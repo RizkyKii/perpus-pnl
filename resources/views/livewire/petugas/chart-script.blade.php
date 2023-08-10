@@ -20,36 +20,54 @@
             }]
         },
         options: {
-            events: ['mouseout', 'touchstart', 'touchmove'],
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-    Livewire.on('ubahBulanTahun', (count, tanggal_pengembalian) => {
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: tanggal_pengembalian,
-                datasets: [{
-                    label: 'Selesai Dipinjam',
-                    data: count,
-                    backgroundColor: '#f012be',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                events: ['mouseout', 'touchstart', 'touchmove'],
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        type: 'linear',
+                        display: true
                     }
-                }
+                },
+            }
+    });
+    
+    Livewire.on('ubahBulanTahun', () => {
+            var ctx = document.getElementById('myChart');
+            if (typeof myChart !== 'undefined' && myChart !== null) {
+                myChart.destroy(); // Destroy the existing chart instance
             }
         });
-    })
-    </script>
     
+        Livewire.on('ubahBulanTahun', (count, tanggal_pengembalian) => {
+            var ctx = document.getElementById('myChart');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: tanggal_pengembalian,
+                    datasets: [{
+                        label: 'Buku Selesai Dipinjam',
+                        data: count,
+                        backgroundColor: '#f012be',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    events: ['mousemove', 'mouseout', 'touchstart', 'touchmove'],
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true
+                        }
+                    },
+                }
+            });
+        });
+    </script>
